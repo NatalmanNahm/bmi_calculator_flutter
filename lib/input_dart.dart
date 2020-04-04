@@ -16,6 +16,7 @@ class _InputPageState extends State<InputPage> {
   Gender selectedGender;
   int height = 180;
   int weight = 60;
+  int age = 18;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,7 +146,46 @@ class _InputPageState extends State<InputPage> {
                         ),
                       ),
                   ),
-                  Expanded(child: ReusableCard(colour: kActiveCardColor)),
+                  Expanded(
+                    child: ReusableCard(
+                      colour: kActiveCardColor,
+                      cardChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            'AGE',
+                            style: kLabelTextStyle,
+                          ),
+                          Text(
+                            age.toString(),
+                            style: kNumberStyle,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.minus,
+                                onPress: (){
+                                  setState(() {
+                                    age --;
+                                  });
+                                },
+                              ),
+                              SizedBox(width: 10.0),
+                              RoundIconButton(
+                                icon: FontAwesomeIcons.plus,
+                                onPress: (){
+                                  setState(() {
+                                    age ++;
+                                  });
+                                },
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               )
           ),
@@ -163,8 +203,8 @@ class _InputPageState extends State<InputPage> {
 
 class RoundIconButton extends StatelessWidget {
   final IconData icon;
-  Function onPress;
-  RoundIconButton({this.icon, this.onPress});
+  final Function onPress;
+  RoundIconButton({@required this.icon, @required this.onPress});
 
   @override
   Widget build(BuildContext context) {
